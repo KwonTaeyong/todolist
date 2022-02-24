@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block head %}
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/html" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() {
+  $( "#datepicker" ).datepicker();
+} );
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+
+<article class="message is-info">
+
+<div class="message-header">
+      <p>Todo List 추가</p>
+      <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+      새로운 투두 리스트를 추가해 보세요!
+    </div>
+
+</article>
+
+
+<div class="columns is-centered">
+
+    <form action="" method="POST" enctype="multiplart/form-data" style="margin-top: 50px;">
+        {% csrf_token %}
+        {% for field in form %}
+
+        {% if field.name == 'images' or field.name == 'files' %}
+
+        {{ field.name }}
+        <div class="file has-name" style="margin-top: 10px;">
+            <label class="file-label">
+            {{ field }}
+                <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+          Choose {{ field.name }} to upload
+        </span>
+      </span>
+      <span class="file-name">
+        Upload your {{ field.name }} here
+      </span>
+    </label>
+
+
+        </div>
+
+        {% else %}
+
+    <div class="field" style="margin-top: 10px;">
+        {{ field.name }}
+        <div class="control">
+        {{ field }}
+    </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <div class="field is-grouped is-grouped-centered" style="margin-top: 30px;">
+        <div class="control">
+          <button class="button is-link">Submit</button>
+        </div>
+        <div class="control">
+          <button class="button is-danger is-light">Cancel</button>
+        </div>
+      </div>
+</form>
+</div>
+{% endblock %}

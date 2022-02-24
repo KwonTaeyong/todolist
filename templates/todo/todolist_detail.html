@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}할일 정보{% endblock %}
+
+{% block content %}
+
+<div class="columns">
+
+
+    <div class="card column">
+        <header class="card-header">
+            <p class="card-header-title">
+                할일 : {{ todolist.name }}
+            </p>
+            <a href="#" class="card-header-icon" aria-label="more options">
+            <span class="icon">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+            </a>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                해야 할일 : {{ todolist.description }}
+                <br>
+                <hr>
+                생성 날짜 : {{ todolist.date_created }}
+                <br>
+                데드 라인 : {{ todolist.date_deadline }}
+                <hr>
+                남은 일수 : {{ todolist.remaining_days }}
+                <hr>
+                관련 이미지 :
+                {% for image in todolist_images_set.all %}
+                <img src="{{ image }}">
+                {% endfor %}
+                <hr>
+                관련 파일 :
+                {% for file in todolist_files_set.all %}
+                <a href="#">{{ file }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a href="{% url 'todo:todolist' %}" class="card-footer-item">
+                <button class="button is-link is-fullwidth">뒤로가기</button>
+            </a>
+            <a href="/update/{ todolist.pks }" class="card-footer-item">
+                <button class="button is-warning is-fullwidth">수정하기</button>
+            </a>
+            <a href="{% url 'todo:todolist' %}" class="card-footer-item">
+                <button class="button is-danger is-fullwidth">삭제하기</button>
+            </a>
+        </footer>
+    </div>
+
+    {% endblock content %}

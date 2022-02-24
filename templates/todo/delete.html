@@ -1,0 +1,28 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'bulma/css/style.css'%}">
+
+<div class="field is-grouped is-grouped-centered">
+    <p>{{ object }}</p><br><br>
+
+</div>
+
+<div class="field is-grouped is-grouped-centered">
+    <form action="" method="post">
+        {{ form }}
+        {% csrf_token %}
+
+        <p class="control">
+            <input type="submit" class="button is-danger" value="삭제">
+            <a class="button is-light" href="{% url 'todo:todolist' %}">
+                취소
+            </a>
+        </p>
+    </form>
+</div>
+
+<div class="field is-grouped is-grouped-centered">
+    <p class="control">
+        해당 투두리스트를 삭제하시겠습니까?
+    </p>
+</div>
